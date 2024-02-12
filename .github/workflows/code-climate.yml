@@ -11,7 +11,7 @@ on:
 
 jobs:
   code-climate:
-    name: Set up
+    name: Code Climate
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout PR head commit
@@ -29,10 +29,13 @@ jobs:
         run: |
           curl -L https://github.com/codeclimate/codeclimate/archive/master.tar.gz | tar xvz
           cd codeclimate-* && sudo make install
-          ls -la
+          codeclimate help
 
       - name: Run unit tests
         run: |
           mkdir -p build
           make test > build/cpackgettests-linux-amd64.txt
 
+      - name: Run Code Climate
+        run: |
+          codeclimate help
